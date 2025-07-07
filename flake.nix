@@ -18,10 +18,13 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         buildDioxusCli =
-          { pname, src }:
+          {
+            pname,
+            src,
+            version,
+          }:
           pkgs.rustPlatform.buildRustPackage {
-            inherit pname src;
-            version = "git";
+            inherit pname src version;
 
             cargoLock = {
               lockFile = "${src}/Cargo.lock";
@@ -36,12 +39,15 @@
               pkg-config
             ];
 
-            buildInputs = with pkgs; [
-              openssl
-            ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-              pkgs.darwin.apple_sdk.frameworks.Security
-              pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
-            ];
+            buildInputs =
+              with pkgs;
+              [
+                openssl
+              ]
+              ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+                pkgs.darwin.apple_sdk.frameworks.Security
+                pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
+              ];
 
             meta = with pkgs.lib; {
               description = "Dioxus CLI tool";
@@ -56,6 +62,7 @@
         packages = {
           v7 = buildDioxusCli {
             pname = "dioxus-cli_v7";
+            version = "0.7.0-alpha.2";
             src = pkgs.fetchFromGitHub {
               owner = "DioxusLabs";
               repo = "dioxus";
@@ -67,11 +74,12 @@
 
           v6 = buildDioxusCli {
             pname = "dioxus-cli_v6";
+            version = "0.6.3";
             src = pkgs.fetchFromGitHub {
               owner = "DioxusLabs";
               repo = "dioxus";
-              # rev = "v0.6";
-              rev = "30f760c";
+              # rev = "v0.6-last";
+              rev = "fc1f1c2";
               sha256 = "sha256-MeYjPyGOQD5AkXj0v64eP+HokMvX4+EJ16bjNk9QQBM=";
             };
           };
