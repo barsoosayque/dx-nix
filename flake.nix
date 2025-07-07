@@ -20,11 +20,19 @@
         buildDioxusCli =
           {
             pname,
-            src,
+            rev,
             version,
+            sha256,
           }:
+          let
+            src = pkgs.fetchFromGitHub {
+              owner = "DioxusLabs";
+              repo = "dioxus";
+              inherit rev sha256;
+            };
+          in
           pkgs.rustPlatform.buildRustPackage {
-            inherit pname src version;
+            inherit pname version src;
 
             cargoLock = {
               lockFile = "${src}/Cargo.lock";
@@ -62,26 +70,18 @@
         packages = {
           v7 = buildDioxusCli {
             pname = "dioxus-cli_v7";
+            # rev = "main";
+            rev = "ddc94cf44c5e2ead5fb15c1db98741ba3242e6e3";
             version = "0.7.0-alpha.2";
-            src = pkgs.fetchFromGitHub {
-              owner = "DioxusLabs";
-              repo = "dioxus";
-              # rev = "main";
-              rev = "ddc94cf44c5e2ead5fb15c1db98741ba3242e6e3";
-              sha256 = "sha256-0cbKCVOC6JW9mYNv+yvKcV3+M11knmYhH+mjhs73lHY";
-            };
+            sha256 = "sha256-0cbKCVOC6JW9mYNv+yvKcV3+M11knmYhH+mjhs73lHY";
           };
 
           v6 = buildDioxusCli {
             pname = "dioxus-cli_v6";
+            # rev = "v0.6-last";
+            rev = "fc1f1c2";
             version = "0.6.3";
-            src = pkgs.fetchFromGitHub {
-              owner = "DioxusLabs";
-              repo = "dioxus";
-              # rev = "v0.6-last";
-              rev = "fc1f1c2";
-              sha256 = "sha256-MeYjPyGOQD5AkXj0v64eP+HokMvX4+EJ16bjNk9QQBM=";
-            };
+            sha256 = "sha256-iA9GDN1hE6KuKINizHZGhXADVZ6xYxl4bbEGqSsl42g";
           };
         };
 
