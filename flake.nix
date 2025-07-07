@@ -49,13 +49,30 @@
 
             buildInputs =
               with pkgs;
-              [
-                openssl
-              ]
-              ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-                pkgs.darwin.apple_sdk.frameworks.Security
-                pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
-              ];
+              (
+                [
+                  openssl
+                  libiconv
+                  pkg-config
+                ]
+                ++ lib.optionals stdenv.isLinux [
+                  glib
+                  gtk3
+                  libsoup_3
+                  webkitgtk_4_1
+                  xdotool
+                ]
+                ++ lib.optionals stdenv.isDarwin (
+                  with darwin.apple_sdk.frameworks;
+                  [
+                    IOKit
+                    Carbon
+                    WebKit
+                    Security
+                    Cocoa
+                  ]
+                )
+              );
 
             meta = with pkgs.lib; {
               description = "Dioxus CLI tool";
