@@ -36,4 +36,4 @@ jobs:
     - name: Build packages
       run: |
         echo "Building for ${{ matrix.system }}"
-        nix build .#dioxus_cli-v7 .#dioxus_cli-v6
+        nix build .#dioxus-cli_v7 .#dioxus-cli_v6

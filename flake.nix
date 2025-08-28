@@ -85,7 +85,7 @@
       in
       {
         packages = {
-          dioxus_cli-v7 = buildDioxusCli {
+          dioxus-cli_v7 = buildDioxusCli {
             pname = "dioxus-cli_v7";
             # rev = "main";
             rev = "a8230d8ff0e769d3c1fee3452b8ea47ec885ecc1";
@@ -93,7 +93,7 @@
             sha256 = "sha256-jwlrQ/mLh+uzpflLGCP11X4jJabeMfCl123psjtOsgg=";
           };
 
-          dioxus_cli-v6 = buildDioxusCli {
+          dioxus-cli_v6 = buildDioxusCli {
             pname = "dioxus-cli_v6";
             # rev = "v0.6-last";
             rev = "fc1f1c2";
