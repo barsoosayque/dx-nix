@@ -89,8 +89,8 @@
             pname = "dioxus-cli_v7";
             # rev = "main";
             rev = "ddc94cf44c5e2ead5fb15c1db98741ba3242e6e3";
-            version = "0.7.0-alpha.2";
-            sha256 = "sha256-0cbKCVOC6JW9mYNv+yvKcV3+M11knmYhH+mjhs73lHY";
+            version = "0.7.0-rc.0";
+            sha256 = "sha256-0cbKCVOC6JW9mYNv+yvKcV3+M11knmYhH+mjhs73lHY=";
           };
 
           v6 = buildDioxusCli {
