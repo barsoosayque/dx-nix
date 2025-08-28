@@ -11,14 +11,10 @@ jobs:
   build:
     strategy:
       matrix:
-        system: [x86_64-linux, aarch64-linux, x86_64-darwin, aarch64-darwin]
+        system: [x86_64-linux, aarch64-darwin]
         include:
           - system: x86_64-linux
             os: ubuntu-latest
-          - system: aarch64-linux
-            os: ubuntu-latest
-          - system: x86_64-darwin
-            os: macos-13
           - system: aarch64-darwin
             os: macos-latest
     
