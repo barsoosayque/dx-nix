@@ -33,29 +33,7 @@ jobs:
         name: 0rvar
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     
-    # - name: Set up QEMU (for aarch64-linux)
-    #   if: matrix.system == 'aarch64-linux'
-    #   uses: docker/setup-qemu-action@v3
-    #   with:
-    #     platforms: arm64
-    
     - name: Build packages
       run: |
         echo "Building for ${{ matrix.system }}"
-        nix build .#v7 .#v6
-        # nix build --print-build-logs --system ${{ matrix.system }} .#v7 .#v6
-    
-    # - name: Check outputs
-    #   run: |
-    #     nix path-info .#v7 .#v6 --system ${{ matrix.system }}
-    #     nix store verify --system ${{ matrix.system }} $(nix path-info .#v7 .#v6)
-    
-    # - name: Test binaries
-    #   run: |
-    #     nix run .#v7 --system ${{ matrix.system }} -- --version
-    #     nix run .#v6 --system ${{ matrix.system }} -- --version
-    
-    # - name: Push to Cachix
-    #   if: github.event_name == 'push'
-    #   run: |
-    #     cachix push dx-dioxus $(nix path-info .#v7 .#v6 --system ${{ matrix.system }})
+        nix build .#dioxus_cli-v7 .#dioxus_cli-v6
